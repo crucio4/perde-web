@@ -1,6 +1,5 @@
 /* ============================================================
-   PERDE — Landing Page Scripts
-   Scroll animations · FAQ accordion · Navbar · Mobile menu
+   PERDE — Landing Page Scripts (Performance Optimized)
    ============================================================ */
 
 (function () {
@@ -9,39 +8,52 @@
   // ---------- Scroll Reveal (Intersection Observer) ----------
   const revealElements = document.querySelectorAll('.reveal');
 
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px',
-    }
-  );
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -20px 0px',
+      }
+    );
 
-  revealElements.forEach((el) => revealObserver.observe(el));
+    revealElements.forEach((el) => revealObserver.observe(el));
+  } else {
+    // Fallback for older browsers
+    revealElements.forEach((el) => el.classList.add('visible'));
+  }
 
-  // ---------- Navbar scroll effect ----------
+  // ---------- Navbar scroll effect (rAF Throttled) ----------
   const navbar = document.getElementById('navbar');
-  let lastScroll = 0;
+  let ticking = false;
 
-  function handleNavScroll() {
-    const scrollY = window.scrollY;
-    if (scrollY > 60) {
+  function updateNav() {
+    if (window.scrollY > 40) {
       navbar.classList.add('scrolled');
     } else {
       navbar.classList.remove('scrolled');
     }
-    lastScroll = scrollY;
+    ticking = false;
   }
 
-  window.addEventListener('scroll', handleNavScroll, { passive: true });
-  handleNavScroll(); // initial check
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(updateNav);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+  updateNav();
 
   // ---------- Mobile menu toggle ----------
   const navToggle = document.getElementById('navToggle');
@@ -54,7 +66,6 @@
       navToggle.setAttribute('aria-expanded', isOpen);
     });
 
-    // Close on link click
     navLinks.querySelectorAll('a').forEach((link) => {
       link.addEventListener('click', () => {
         navLinks.classList.remove('open');
@@ -68,19 +79,19 @@
 
   faqItems.forEach((item) => {
     const questionBtn = item.querySelector('.faq-question');
+    if (!questionBtn) return;
 
     questionBtn.addEventListener('click', () => {
       const isOpen = item.classList.contains('open');
 
-      // Close all other items
       faqItems.forEach((other) => {
         if (other !== item) {
           other.classList.remove('open');
-          other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          const btn = other.querySelector('.faq-question');
+          if (btn) btn.setAttribute('aria-expanded', 'false');
         }
       });
 
-      // Toggle current
       item.classList.toggle('open');
       questionBtn.setAttribute('aria-expanded', !isOpen);
     });
@@ -95,7 +106,7 @@
       const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
-        const navHeight = navbar.offsetHeight;
+        const navHeight = navbar ? navbar.offsetHeight : 0;
         const targetPosition = target.getBoundingClientRect().top + window.scrollY - navHeight - 20;
 
         window.scrollTo({
@@ -105,32 +116,4 @@
       }
     });
   });
-
-  // ---------- Parallax orbs (subtle) ----------
-  const orbs = document.querySelectorAll('.orb');
-
-  if (orbs.length > 0 && window.matchMedia('(min-width: 700px)').matches) {
-    let ticking = false;
-
-    window.addEventListener(
-      'mousemove',
-      (e) => {
-        if (ticking) return;
-        ticking = true;
-
-        requestAnimationFrame(() => {
-          const x = (e.clientX / window.innerWidth - 0.5) * 2;
-          const y = (e.clientY / window.innerHeight - 0.5) * 2;
-
-          orbs.forEach((orb, i) => {
-            const factor = (i + 1) * 8;
-            orb.style.transform = `translate(${x * factor}px, ${y * factor}px)`;
-          });
-
-          ticking = false;
-        });
-      },
-      { passive: true }
-    );
-  }
 })();
