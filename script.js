@@ -277,8 +277,9 @@
         ['download-btn', 'download-btn-2'].forEach(function (id) {
           var btn = document.getElementById(id);
           if (!btn) return;
+          // Cross-origin, so the download attribute would be ignored —
+          // GitHub already serves the asset as an attachment.
           btn.href = apk.browser_download_url;
-          btn.setAttribute('download', apk.name);
         });
 
         ['download-btn-meta', 'download-btn-meta-2'].forEach(function (id) {

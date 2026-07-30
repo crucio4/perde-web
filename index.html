@@ -20,13 +20,17 @@
   <meta property="og:url" content="https://crucio4.github.io/perde-web/">
   <meta property="og:site_name" content="Perde">
   <meta property="og:locale" content="en_US">
-  <meta property="og:image" content="https://crucio4.github.io/perde-web/assets/perde_icon.png">
+  <meta property="og:image" content="https://crucio4.github.io/perde-web/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Perde — on-device screen content filter for Android. No blocklist. Nothing leaves the phone.">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Perde — On-Device Screen Content Filter for Android">
   <meta name="twitter:description" content="Reads pixels and text. Works where blocklists and incognito fail. Nothing leaves your phone. Open source.">
-  <meta name="twitter:image" content="https://crucio4.github.io/perde-web/assets/perde_icon.png">
+  <meta name="twitter:image" content="https://crucio4.github.io/perde-web/assets/og-image.png">
+  <meta name="twitter:image:alt" content="Perde — on-device screen content filter for Android.">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,8 +41,8 @@
   <link rel="stylesheet" href="styles.css">
 
   <!-- Favicon -->
-  <link rel="icon" href="favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/perde_icon.png">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 
   <!-- Schema.org JSON-LD: SoftwareApplication -->
   <script type="application/ld+json">
@@ -56,15 +60,22 @@
       "priceCurrency": "USD"
     },
     "softwareVersion": "1.0",
-    "fileSize": "32MB",
+    "fileSize": "31MB",
+    "datePublished": "2026-07-30",
+    "dateModified": "2026-07-31",
     "author": {
       "@type": "Person",
-      "name": "Berke"
+      "name": "Berke",
+      "url": "https://github.com/crucio4"
     },
     "url": "https://crucio4.github.io/perde-web/",
-    "downloadUrl": "https://crucio4.github.io/perde-web/assets/perde.apk",
-    "installUrl": "https://github.com/crucio4/perde-app",
+    "downloadUrl": "https://github.com/crucio4/perde-app/releases/latest/download/perde_app.apk",
+    "installUrl": "https://github.com/crucio4/perde-app/releases/latest",
     "codeRepository": "https://github.com/crucio4/perde-app",
+    "sameAs": [
+      "https://github.com/crucio4/perde-app"
+    ],
+    "permissions": "Accessibility service, display over other apps, usage access, battery unrestricted",
     "programmingLanguage": "Kotlin",
     "isAccessibleForFree": true,
     "featureList": [
@@ -180,7 +191,7 @@
 <nav class="nav" id="navbar">
   <div class="shell nav-inner">
     <a href="#" class="brand">
-      <img src="assets/perde_icon.png" alt="" width="26" height="26" class="brand-mark">
+      <img src="assets/perde_mark.png" alt="" width="26" height="26" class="brand-mark">
       <span class="brand-word">PERDE</span>
       <span class="brand-gloss">/ curtain</span>
     </a>
@@ -220,12 +231,18 @@
       </p>
 
       <div class="hero-actions">
-        <a href="assets/perde.apk" download="perde.apk" class="btn btn-solid" id="download-btn">
+        <a href="https://github.com/crucio4/perde-app/releases/latest/download/perde_app.apk" class="btn btn-solid" id="download-btn">
           <span id="download-btn-text">Download APK</span>
-          <span class="btn-meta" id="download-btn-meta">32 MB</span>
+          <span class="btn-meta" id="download-btn-meta">31 MB</span>
         </a>
         <a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener" class="btn btn-ghost">
           Read the source
+        </a>
+        <a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener" class="btn btn-ghost btn-sponsor">
+          <svg class="heart" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M8 14.25l-.345-.666C4.02 9.773 2 7.723 2 5.5 2 3.567 3.567 2 5.5 2c1.02 0 1.96.44 2.5 1.15A3.49 3.49 0 0 1 10.5 2C12.433 2 14 3.567 14 5.5c0 2.223-2.02 4.273-5.655 8.084L8 14.25z"/>
+          </svg>
+          Sponsor
         </a>
       </div>
 
@@ -735,12 +752,17 @@
     </ol>
 
     <div class="get-actions">
-      <a href="assets/perde.apk" download="perde.apk" class="btn btn-solid" id="download-btn-2">
+      <a href="https://github.com/crucio4/perde-app/releases/latest/download/perde_app.apk" class="btn btn-solid" id="download-btn-2">
         <span>Download APK</span>
-        <span class="btn-meta" id="download-btn-meta-2">32 MB</span>
+        <span class="btn-meta" id="download-btn-meta-2">31 MB</span>
       </a>
       <a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener" class="btn btn-ghost">Source &amp; build instructions</a>
-      <a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener" class="btn btn-ghost">Sponsor</a>
+      <a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener" class="btn btn-ghost btn-sponsor">
+        <svg class="heart" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M8 14.25l-.345-.666C4.02 9.773 2 7.723 2 5.5 2 3.567 3.567 2 5.5 2c1.02 0 1.96.44 2.5 1.15A3.49 3.49 0 0 1 10.5 2C12.433 2 14 3.567 14 5.5c0 2.223-2.02 4.273-5.655 8.084L8 14.25z"/>
+        </svg>
+        Sponsor
+      </a>
     </div>
     <p class="fineprint">
       Sideloading means your phone will warn you. That warning is correct and you should apply
@@ -756,7 +778,7 @@
 <footer class="foot">
   <div class="shell foot-inner">
     <div class="foot-brand">
-      <img src="assets/perde_icon.png" alt="" width="22" height="22">
+      <img src="assets/perde_mark.png" alt="" width="22" height="22">
       <span>PERDE</span>
     </div>
     <p class="foot-line">On-device screen content filter for Android. Open source. Built by one person.</p>

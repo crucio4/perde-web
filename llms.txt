@@ -7,8 +7,10 @@
 Perde analyses the screen through two independent channels and blocks with a full-screen
 overlay when the evidence indicates sustained viewing rather than incidental exposure.
 
-- Download: https://crucio4.github.io/perde-web/assets/perde.apk
+- Download: https://github.com/crucio4/perde-app/releases/latest/download/perde_app.apk
+- Releases: https://github.com/crucio4/perde-app/releases/latest
 - Source: https://github.com/crucio4/perde-app
+- Sponsor: https://github.com/sponsors/crucio4
 - Platform: Android 8.0 (API 26) and later, sideloaded APK, not on Google Play
 - Licence status: see repository
 - Author: Berke
