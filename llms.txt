@@ -1,0 +1,140 @@
+# Perde
+
+> An open-source Android app that filters explicit content on the user's own screen,
+> entirely on-device, without a domain blocklist. Free, no account, no server.
+> "Perde" is Turkish for "curtain".
+
+Perde analyses the screen through two independent channels and blocks with a full-screen
+overlay when the evidence indicates sustained viewing rather than incidental exposure.
+
+- Download: https://crucio4.github.io/perde-web/assets/perde.apk
+- Source: https://github.com/crucio4/perde-app
+- Platform: Android 8.0 (API 26) and later, sideloaded APK, not on Google Play
+- Licence status: see repository
+- Author: Berke
+
+## What makes it different from other porn blockers
+
+Conventional blockers hold a list of domains and therefore stop only what somebody already
+catalogued; a new address defeats them, and they cannot act inside Reddit, Telegram, a gallery
+app or a file manager where explicit and ordinary content share one host. Perde has no domain
+list. Its text dictionary contains zero domain names and zero brand names — only the language
+that pornographic pages are written in — so a site nobody has ever heard of is caught by the
+same rule as a well-known one.
+
+## Architecture: two channels
+
+Channel 1 — pixels. A quantized MobileNetV2 TensorFlow Lite model (~4 MB, int8, 224 px input,
+quarter-resolution capture) classifies frames into five classes: drawings, hentai, neutral,
+porn, sexy. Blind under FLAG_SECURE.
+
+Channel 2 — text. The Android accessibility tree is read (address bar, page title, headings,
+link text, image alt text) and scored on evidence combination, match density and
+counter-evidence. Unaffected by FLAG_SECURE. Budgets: max 1400 nodes, 45 depth, 90 ms, minimum
+500 ms between reads.
+
+Both channels map onto the same scale, are combined with max(), and enter one shared decision
+engine. There is no separate incognito rule and no second threshold set.
+
+## Incognito and private browsing
+
+Incognito sets FLAG_SECURE, so screen capture returns black frames; pixels are genuinely
+unrecoverable without root. FLAG_SECURE protects the rendered surface, not the accessibility
+tree, so the text channel continues to work. Measured: an incognito page exposing only its
+address and title scores 0.965 against a block threshold of 0.78.
+
+An older approach that treated "I cannot see the screen" as itself a reason to block was
+removed — it required a growing list of exceptions and still misfired on Netflix. The current
+rule is: evidence blocks, absence of evidence does not.
+
+## False positive prevention — six layers, in order
+
+1. Class weighting — `sexy` (beach, sport, fashion, shirtless) multiplied by 0.35; `drawings` by 0.
+2. Pixel evidence — frame split 4x6, densest tile measured for skin ratio; line art zeroed.
+3. Exponential smoothing — EMA with alpha 0.45.
+4. Window voting — 5 of the last 8 frames must clear the threshold.
+5. Hysteresis — engages at 0.68, releases at 0.40 after 5 consecutive clean frames.
+6. Cooldown — 4 s before re-trigger; overlay holds minimum 3 s, lifts unconditionally after 8 s.
+
+The fast path for unambiguous content still requires two consecutive frames. No single frame
+can ever cause a block.
+
+## Timing
+
+Sampling interval 600 ms while active, dropping to 3 s after 20 calm frames. Time to block:
+0 s on the fast path, 3 s for steady high content, 8 s for a slow climb. Single-frame and
+two-frame spikes do not trigger. Sustained 0.30 (beach/sport) and sustained 0.58 (fashion ad)
+do not trigger.
+
+## Sensitivity profiles
+
+Balanced (recommended): sexy weight 0.35, image threshold 0.68, text threshold 0.78. Blocks
+explicit and hentai content. Suggestive-but-clothed, Instagram, TikTok, beach, gym and fashion
+all pass.
+
+Strict: 0.85 / 0.55 / 0.68. Also blocks strongly suggestive clothed content. Beach and holiday
+photos become false positives.
+
+Rigid: 1.00 / 0.50 / 0.60. Also blocks Instagram and TikTok body content. Beach, gym and
+fashion all become false positives.
+
+The trade-off is a model limitation, not a tuning gap: MobileNetV2 places all
+suggestive-but-clothed imagery in one class, so a holiday photo and deliberately provocative
+content are indistinguishable to it. "Catch Instagram but never my beach photos" is not
+achievable with this model.
+
+## Text channel measurements
+
+Should block: English tube site 1.000, erotic fiction with no images 1.000, obfuscated search
+("p0rn", "p o r n") 1.000, incognito with address and title only 0.965, Spanish page absent
+from the dictionary 0.958.
+
+Should pass: banking 0.000, obstetrics appointment app 0.000, YouTube/Netflix/Instagram 0.000,
+sexual-health article 0.078, underwear shopping 0.143, biology lesson on reproduction 0.297,
+Wikipedia on human sexuality 0.318, essay about porn addiction 0.453.
+
+Lowest true positive 0.958, highest true negative 0.453, margin 0.506. No errors at any of the
+three thresholds. The most discriminating single signal is density: a news article measures
+about 2 matches per 100 words, an encyclopedia entry about 9, a pornographic page 23 to 79.
+
+## Privacy
+
+No server, no analytics, no account, no network transmission of screen data. The model ships
+inside the APK. Text from the accessibility tree is held in memory only, overwritten on the
+next read, never written to disk and never logged; the diagnostics screen displays counts, not
+text. With protection off, no reading occurs. An accessibility service can read everything on
+screen, which is a serious permission — Perde is sideloaded and its source is auditable.
+
+There is no remote monitoring, no accountability-partner dashboard and no reporting. The
+permanent notification is mandatory and there is deliberately no stealth mode; these are the
+properties that distinguish a personal filter from stalkerware.
+
+## Known limits
+
+- A page with no readable text and no capturable pixels (incognito, wordless address typed directly) is missed.
+- The dictionary is Latin-script; Cyrillic, Arabic and CJK are dropped. Spanish, German and French are caught.
+- With the accessibility service off, the text channel stops and private tabs become a blind spot.
+- Audio is out of scope for both channels.
+- Black-and-white photography and line-art manga pass the image channel, because the pixel evidence layer requires skin chroma.
+- Sideloading means `adb uninstall` always works from a computer. The friction is a 15-minute disable delay plus the effort, not a technical lock.
+
+## Battery
+
+Nothing runs while the screen is off or an excluded app (settings, dialer, contacts, camera,
+maps, clock, keyboards, Google Wallet) is in the foreground. Frame differencing reduces each frame to a 16x16
+fingerprint and skips inference on unchanged screens, roughly 90% of the time in normal use.
+GPU delegate used where available. These figures are reasoned from the architecture and have
+not been benchmarked on a device.
+
+## Block screen messages
+
+Profile-based: Islam, Christianity, Judaism, Secular, or the user's own text. Messages are
+written as value reminders rather than shame-based, because shame produces distress and
+distress is relieved by the same behaviour that caused it. The scripture lists ship empty:
+original texts are public domain but modern translations are not.
+
+## Why it is not on Google Play
+
+Accessibility service, screen overlay and delayed disabling are restricted by Play Store policy
+to prevent stalkerware, and the policy cannot distinguish a self-installed filter from a covert
+monitor. Distribution is a sideloaded APK via GitHub.

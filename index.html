@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0c">
 
   <!-- SEO -->
-  <title>Perde — AI-Powered Anti-Gooner App for Android | Break the Cycle</title>
-  <meta name="description" content="Perde is an open-source Android app that uses on-device AI to detect when you're watching porn and intervenes in real time. It scans your screen, recognizes NSFW content, and blocks it before you spiral. No data leaves your phone. Built for people who actually want to quit.">
-  <meta name="keywords" content="anti gooner app, stop watching porn, porn addiction app android, nofap app, quit porn app, anti porn android, porn blocker AI, gooning prevention, break porn addiction, porn recovery app, stop jerking off app, on-device nsfw detection, porn addiction help, compulsive porn use, nofap tools, porn free, anti fap app, dopamine detox porn">
-  <meta name="author" content="Perde">
-  <meta name="robots" content="index, follow">
+  <title>Perde — On-Device Screen Content Filter for Android</title>
+  <meta name="description" content="Perde reads your Android screen two ways — pixels through an on-device neural network, and text through the accessibility tree. No domain blocklist. It works in incognito, on Reddit, in Telegram, on sites nobody has ever heard of. Nothing leaves the device. Open source.">
+  <meta name="keywords" content="on-device nsfw detection android, porn blocker without blocklist, screen content filter android, porn blocker that works on reddit, incognito porn blocker, nofap app android, open source porn blocker, tflite nsfw classifier, accessibility content filter, quit porn app android">
+  <meta name="author" content="Berke">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://crucio4.github.io/perde-web/">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Perde — AI That Catches You Watching Porn and Stops You">
-  <meta property="og:description" content="Open-source Android app that scans your screen with on-device AI. When it detects you've been looking at NSFW content, it blocks the screen and snaps you out of it. No data leaves your phone.">
+  <meta property="og:title" content="Perde — On-Device Screen Content Filter for Android">
+  <meta property="og:description" content="Two channels: it classifies what's on screen, and it reads what's written on it. Blocklists miss what they don't know. Perde doesn't need to know.">
   <meta property="og:url" content="https://crucio4.github.io/perde-web/">
   <meta property="og:site_name" content="Perde">
   <meta property="og:locale" content="en_US">
@@ -23,20 +24,21 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Perde — AI-Powered Anti-Gooner App for Android">
-  <meta name="twitter:description" content="Scans your screen with on-device AI. Detects NSFW content. Blocks it. Snaps you out of it. No data leaves your phone. Open source.">
+  <meta name="twitter:title" content="Perde — On-Device Screen Content Filter for Android">
+  <meta name="twitter:description" content="Reads pixels and text. Works where blocklists and incognito fail. Nothing leaves your phone. Open source.">
   <meta name="twitter:image" content="https://crucio4.github.io/perde-web/assets/perde_icon.png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="styles.css">
 
   <!-- Favicon -->
   <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/perde_icon.png">
 
   <!-- Schema.org JSON-LD: SoftwareApplication -->
   <script type="application/ld+json">
@@ -44,36 +46,38 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Perde",
-    "alternateName": "Perde Anti-Gooner",
-    "description": "An open-source Android app designed to help people break compulsive porn habits. Perde uses on-device AI (TFLite MobileNetV2) to continuously scan the screen. When it detects that the user has been watching explicit content for more than a few seconds, it throws a full-screen overlay with a motivational message and forces the app closed. All processing is local — no data ever leaves the device. Built for the NoFap and porn recovery community.",
-    "applicationCategory": "HealthApplication",
-    "applicationSubCategory": "Addiction Recovery",
-    "operatingSystem": "Android",
+    "description": "Perde is an open-source Android app that filters explicit screen content on-device, without a domain blocklist. It analyses the screen through two independent channels: a quantized MobileNetV2 TensorFlow Lite classifier reading pixels, and a text analyser reading the accessibility tree. Because the accessibility tree is not affected by FLAG_SECURE, Perde still evaluates content in incognito and private browsing where screen capture returns black frames. Both channels feed one decision engine using exponential smoothing, window voting, hysteresis and cooldown, so a single frame never causes a block. All processing is local: there is no server, no analytics and no network transmission of screen data.",
+    "applicationCategory": "UtilitiesApplication",
+    "applicationSubCategory": "Content Filtering",
+    "operatingSystem": "Android 8.0 and later",
     "offers": {
       "@type": "Offer",
       "price": "0",
       "priceCurrency": "USD"
     },
     "softwareVersion": "1.0",
+    "fileSize": "32MB",
     "author": {
       "@type": "Person",
       "name": "Berke"
     },
-    "license": "https://opensource.org/licenses/MIT",
     "url": "https://crucio4.github.io/perde-web/",
     "downloadUrl": "https://crucio4.github.io/perde-web/assets/perde.apk",
+    "installUrl": "https://github.com/crucio4/perde-app",
     "codeRepository": "https://github.com/crucio4/perde-app",
+    "programmingLanguage": "Kotlin",
+    "isAccessibleForFree": true,
     "featureList": [
-      "On-device NSFW detection using TFLite MobileNetV2 — no internet required",
-      "Detects sustained porn viewing and intervenes with full-screen block overlay",
-      "15-minute disable delay prevents impulsive deactivation",
-      "5-layer false positive prevention — normal browsing is never interrupted",
-      "3 sensitivity profiles: Balanced, Strict, Rigid",
-      "Motivational block screen messages: Islam, Christianity, Judaism, Secular, or custom",
-      "Works across all apps — browsers, Reddit, Telegram, gallery, social media",
-      "Black frame detection catches incognito/private browsing attempts",
-      "Battery-optimized: frame differencing, adaptive sampling, foreground-only capture",
-      "Fully open source — no tracking, no cloud, no subscriptions"
+      "Two independent detection channels: on-device image classification and accessibility-tree text analysis",
+      "Works in incognito and private browsing, where screen capture is blocked by FLAG_SECURE",
+      "No domain blocklist — a site that has never been catalogued is still evaluated",
+      "Six-layer false positive prevention; a single high-scoring frame never triggers a block",
+      "Text analysis contains no domain names or brand names, only language patterns",
+      "Three sensitivity profiles with published, measured trade-offs",
+      "15-minute delay before protection can be switched off",
+      "Block screen shows value reminders rather than shame-based messages",
+      "Battery-aware: frame differencing, adaptive sampling, foreground-only capture",
+      "Fully on-device: no server, no analytics, no network transmission of screen data"
     ]
   }
   </script>
@@ -86,74 +90,82 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is Perde and how does it help with porn addiction?",
+        "name": "What is Perde?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Perde is an Android app that uses on-device AI to scan your screen in real time. When it detects that you've been looking at explicit content for several seconds, it understands you're engaging with porn, throws a full-screen overlay with a motivational message, and forces you back to the home screen. It's designed to break the autopilot loop — the moment between the urge and the act — by creating real friction. It won't stop you if you're determined, but it interrupts the mindless spiral."
+          "text": "Perde is a free and open-source Android app that filters explicit content on your own screen. It does not use a list of blocked websites. Instead it reads the screen through two independent channels — a neural network that classifies the image, and a text analyser that reads the accessibility tree — and blocks with a full-screen overlay when both the evidence and the duration indicate sustained viewing rather than incidental exposure. All analysis runs on the device."
         }
       },
       {
         "@type": "Question",
-        "name": "Does Perde send my data to a server or the cloud?",
+        "name": "How does Perde work in incognito mode or private browsing?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. All AI processing runs locally on your device using TensorFlow Lite. Perde has no server, no analytics, no network calls, and no cloud backend. Your screen content is analyzed and discarded on-device. Nobody — not even the developer — can see what you're looking at. The source code is fully open for verification."
+          "text": "Incognito windows set FLAG_SECURE, which makes screen capture return black frames. Pixels are genuinely unavailable and no app can recover them without root. But FLAG_SECURE protects the rendered surface, not the accessibility tree. Perde reads the address bar, page title, headings, link text and image alt text through the accessibility service, and scores that text with the same decision engine used for images. In measurements, an incognito page exposing only its address and title scored 0.965 against a block threshold of 0.78. So in incognito Perde cannot see the pixels, but it can still read the content."
         }
       },
       {
         "@type": "Question",
-        "name": "How is Perde different from regular porn blockers?",
+        "name": "Does Perde send screen data to a server?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Regular porn blockers use domain lists — they block known porn sites. Perde doesn't care where the content comes from. It watches your actual screen using AI and detects explicit content visually. This means it catches porn on Reddit, Twitter, Telegram, gallery apps, random websites, and even saved files. Blocklist-based tools always have gaps. Perde sees what you see."
+          "text": "No. Perde has no server, no analytics and no network calls for screen data. The TensorFlow Lite model is bundled in the APK and runs locally. Text read from the accessibility tree is held in memory only, overwritten on the next read, never written to disk and never logged. The on-device diagnostics screen shows counts, not text. The source code is public and can be audited."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I just turn Perde off when I get an urge?",
+        "name": "How is Perde different from a normal porn blocker?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not instantly. Perde has a built-in 15-minute disable delay. When you hit 'stop', nothing happens for 15 minutes. That's the whole point — the gap between impulse and action is where recovery happens. You can always use adb uninstall from a computer, but that requires a cable and effort. Perde isn't a cage; it's speed bumps on a road you're choosing not to drive down."
+          "text": "Normal blockers hold a list of domains, so they only stop what somebody already catalogued, and a new address defeats them. Perde has no domain list at all — the text dictionary contains no domain names and no brand names, only the language that pornographic pages are written in. That means a site nobody has ever heard of is caught by the same rule as a well-known one, and content is evaluated identically inside Reddit, Telegram, a gallery app or a file manager."
         }
       },
       {
         "@type": "Question",
-        "name": "Does Perde work in incognito or private browsing?",
+        "name": "Will Perde block normal content like beach photos or Instagram?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Partially. Incognito mode uses FLAG_SECURE which blocks screen capture, making the screen appear black to Perde. However, Perde has backup layers: black frame detection treats consecutive black frames as suspicious activity, the accessibility service reads the URL bar text even in incognito, and you can set up Private DNS for system-wide domain filtering."
+          "text": "On the Balanced profile, effectively no. Six layers stand between a high-scoring frame and a block: class weighting, pixel-level evidence checking, exponential smoothing, window voting requiring 5 of the last 8 frames above threshold, hysteresis and a cooldown. On the Strict profile beach and holiday photos will trigger. On Rigid, gym and fashion content will trigger too. These are measured outcomes, published rather than hidden, because the underlying model cannot distinguish a holiday photo from suggestive content — both land in the same class."
         }
       },
       {
         "@type": "Question",
-        "name": "Will Perde drain my phone battery?",
+        "name": "Can I turn Perde off when I get an urge?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Perde only scans when a monitored app is in the foreground. Frame differencing skips analysis when the screen hasn't changed (about 90% of the time during normal use). Adaptive sampling drops from 1 fps to 0.33 fps during calm browsing. The quantized AI model is only 4-5 MB and uses GPU acceleration when available."
+          "text": "Not immediately. Switching protection off starts a 15-minute delay before it actually stops. Because Perde is sideloaded you can always remove it with adb uninstall from a computer. That is deliberate: the friction comes from the delay and the effort, not from a technical lock. A filter that can be dismissed on impulse is not a filter."
         }
       },
       {
         "@type": "Question",
-        "name": "Does Perde support religious motivation messages?",
+        "name": "What can Perde not detect?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. When Perde blocks your screen, it shows a motivational message from your chosen profile: Islam (Quran with Arabic original), Christianity (Scripture with Greek/Hebrew original), Judaism (Tanakh with Hebrew original), Secular (evidence-based motivational text), or Custom (your own messages). Messages are value reminders, not shame-based — research shows shame actually fuels the cycle."
+          "text": "Five measured gaps, all documented. A page with no readable text and no capturable pixels — an incognito single-video page reached by typing the address directly — is missed. The text dictionary is Latin-script, so Russian, Arabic and CJK pages fall through, though Spanish, German and French are caught because the vocabulary overlaps. If the accessibility service is switched off the text channel stops entirely. Audio is out of scope for both channels. Black-and-white photography and line-art manga also pass, because the pixel evidence check requires skin chroma."
         }
       },
       {
         "@type": "Question",
-        "name": "Why isn't Perde on the Google Play Store?",
+        "name": "Why is Perde not on the Google Play Store?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Perde uses accessibility services, screen overlay permissions, and a disable delay — all of which conflict with Play Store policies around stalkerware prevention. The irony is that the same features that make Perde effective are the ones Google doesn't allow. It's distributed as a sideloaded APK through GitHub."
+          "text": "Perde needs an accessibility service, a screen overlay and a delay on disabling itself. Those are the same capabilities Play Store policy restricts to prevent stalkerware, and the policy cannot distinguish a self-installed filter from a covert monitor. So Perde is distributed as a sideloaded APK through GitHub instead."
         }
       },
       {
         "@type": "Question",
-        "name": "Is Perde the same as a parental control or spy app?",
+        "name": "Is Perde spyware or a parental control app?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Perde is self-installed, self-configured, and sends data to nobody. You install it on your own phone for yourself. There is no remote monitoring, no accountability partner dashboard, no reports sent anywhere. The permanent notification and absence of a stealth mode are deliberate design choices that separate it from stalkerware."
+          "text": "No. Perde is self-installed and self-configured, has no remote monitoring, no accountability-partner dashboard and no reporting of any kind. The permanent status-bar notification is mandatory and the absence of a stealth mode is deliberate — those are precisely the properties that separate a personal filter from stalkerware."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Perde drain the battery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Four measures limit the cost. Nothing runs while the screen is off or while an excluded app is in the foreground. Frame differencing compares a 16x16 fingerprint of each frame against the previous one and skips inference on static screens, which removes roughly 90 percent of the work in normal use. After 20 calm frames the sampling interval drops from 600 milliseconds to 3 seconds. The model is quantized to about 4 MB and uses GPU acceleration where available. These figures come from the architecture and have not been benchmarked on a device."
         }
       }
     ]
@@ -162,486 +174,601 @@
 </head>
 <body>
 
-  <!-- ============ NAVIGATION ============ -->
-  <nav class="nav" id="navbar">
-    <div class="container nav-inner">
-      <a href="#" class="nav-logo">
-        <img src="assets/perde_icon.png" alt="Perde Logo" class="logo-img" width="32" height="32" style="width:32px; height:32px; max-width:32px; max-height:32px; flex-shrink:0; object-fit:contain;">
-        Perde
-      </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="#profiles">Profiles</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#support">Support</a></li>
-        <li><a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener" class="nav-cta">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          GitHub
-        </a></li>
-      </ul>
-      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ============ HERO ============ -->
-  <section class="hero section" id="hero">
-    <!-- Animated background -->
-    <div class="hero-bg" aria-hidden="true">
-      <div class="orb orb-1"></div>
-      <div class="orb orb-2"></div>
-      <div class="orb orb-3"></div>
-    </div>
-    <div class="hero-grid" aria-hidden="true"></div>
+<!-- ============ NAV ============ -->
+<nav class="nav" id="navbar">
+  <div class="shell nav-inner">
+    <a href="#" class="brand">
+      <img src="assets/perde_icon.png" alt="" width="26" height="26" class="brand-mark">
+      <span class="brand-word">PERDE</span>
+      <span class="brand-gloss">/ curtain</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#channels">Channels</a></li>
+      <li><a href="#layers">Layers</a></li>
+      <li><a href="#profiles">Profiles</a></li>
+      <li><a href="#limits">Limits</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#get" class="nav-cta">Download</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <div class="container hero-content">
-      <div class="hero-badge">
-        <span class="dot"></span>
-        Open Source · No Data Leaves Your Phone
-      </div>
+<main id="main">
 
-      <h1>
-        It knows when<br>
-        <span class="gradient-text">you're slipping.</span><br>
-        And it stops you.
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="shell hero-shell">
+
+    <div class="hero-copy">
+      <p class="eyebrow"><span class="pip" aria-hidden="true"></span> On-device · Open source · Android 8+</p>
+
+      <h1 class="display">
+        Blocklists only stop
+        <em>what someone<br>already knew about.</em>
       </h1>
 
-      <p class="hero-description">
-        Perde watches your screen with on-device AI. When it detects you've been looking at porn for more than a few seconds, it <strong>blocks the screen, shows you a message, and kills the app</strong>. No cloud. No data leaks. No one watching but you.
+      <p class="lede">
+        Perde has no list. It reads your screen two ways at once — the <strong>pixels</strong>,
+        through a neural network running on your phone, and the <strong>text</strong>, through
+        the accessibility tree. Incognito hides the first. It does not hide the second.
       </p>
 
       <div class="hero-actions">
-        <a href="assets/perde.apk" download="perde.apk" class="btn btn-primary" id="download-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download APK
+        <a href="assets/perde.apk" download="perde.apk" class="btn btn-solid" id="download-btn">
+          <span id="download-btn-text">Download APK</span>
+          <span class="btn-meta" id="download-btn-meta">32 MB</span>
         </a>
-        <a href="#support" class="btn btn-secondary" id="support-hero-btn">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          Support the Project
-        </a>
-        <a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener" class="btn btn-secondary">
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-          View Source
+        <a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener" class="btn btn-ghost">
+          Read the source
         </a>
       </div>
 
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="stat-value">100%</div>
-          <div class="stat-label">On-device · no cloud</div>
-        </div>
-        <div class="hero-stat">
-          <div class="stat-value">0 bytes</div>
-          <div class="stat-label">Sent anywhere</div>
-        </div>
-        <div class="hero-stat">
-          <div class="stat-value">3–8s</div>
-          <div class="stat-label">To intervene</div>
-        </div>
-        <div class="hero-stat">
-          <div class="stat-value">15 min</div>
-          <div class="stat-label">Disable delay</div>
-        </div>
-      </div>
+      <p class="release-info" id="release-info" hidden>
+        <span id="release-version"></span><span class="sep">·</span><span id="release-size"></span><span class="sep">·</span><span id="release-date"></span>
+      </p>
     </div>
-  </section>
 
-  <!-- ============ FEATURES ============ -->
-  <section class="section" id="features">
-    <div class="container">
-      <span class="section-label reveal">Why Perde</span>
-      <h2 class="section-title reveal">Not a blocklist.<br>Not a DNS filter.<br>This actually sees your screen.</h2>
-      <p class="section-subtitle reveal">Most porn blockers block domains. You find a new one in 5 seconds. Perde doesn't care where the content comes from — it watches what's actually on your screen and intervenes when you're engaging with it.</p>
+    <!-- Live detection demo -->
+    <div class="rig" id="rig">
+      <div class="rig-chrome">
+        <span class="rig-title">detection engine</span>
+        <span class="rig-state" id="rigState" data-state="idle">watching</span>
+      </div>
 
-      <div class="features-grid reveal-stagger">
-        <div class="feature-card reveal" style="--i:0">
-          <div class="feature-icon">👁️</div>
-          <h3>Sees What You See</h3>
-          <p>On-device AI scans your screen in real time. It doesn't matter if it's Chrome, Reddit, Telegram, or a saved file — if explicit content is visible, Perde detects it.</p>
+      <div class="rig-screen">
+        <div class="rig-content" id="rigContent" aria-hidden="true">
+          <span class="rig-content-label" id="rigContentLabel">browsing</span>
         </div>
 
-        <div class="feature-card reveal" style="--i:1">
-          <div class="feature-icon">⏱️</div>
-          <h3>Detects Sustained Viewing</h3>
-          <p>A single NSFW frame doesn't trigger it. Perde watches for sustained engagement — when you've been looking at explicit content for several seconds, it knows you're not just scrolling past.</p>
-        </div>
-
-        <div class="feature-card reveal" style="--i:2">
-          <div class="feature-icon">🛑</div>
-          <h3>Blocks & Intervenes</h3>
-          <p>Full-screen overlay covers everything. A motivational message appears. You're sent to the home screen. The loop is broken. You can't dismiss it for 3 seconds.</p>
-        </div>
-
-        <div class="feature-card reveal" style="--i:3">
-          <div class="feature-icon">⏳</div>
-          <h3>15-Minute Disable Delay</h3>
-          <p>You can't impulsively turn it off. The 15-minute wait is deliberate — it's the gap between urge and action where recovery actually happens. That friction is the whole point.</p>
-        </div>
-
-        <div class="feature-card reveal" style="--i:4">
-          <div class="feature-icon">🔒</div>
-          <h3>Absolute Privacy</h3>
-          <p>Everything runs locally on your phone. No server, no cloud, no analytics. Nobody — not even the developer — can see what you're looking at. The code is fully open source.</p>
-        </div>
-
-        <div class="feature-card reveal" style="--i:5">
-          <div class="feature-icon">🕊️</div>
-          <h3>Value Reminders, Not Shame</h3>
-          <p>Block screen shows messages from your faith (Islam, Christianity, Judaism) or secular motivation. Shame fuels the cycle. Perde reminds you why you chose to stop.</p>
+        <!-- the curtain -->
+        <div class="curtain" id="curtain" aria-hidden="true">
+          <div class="curtain-inner">
+            <p class="curtain-kicker">Perde</p>
+            <p class="curtain-msg" id="curtainMsg">You decided this wasn't who you wanted to be.</p>
+          </div>
         </div>
       </div>
+
+      <div class="rig-readout">
+        <div class="window" id="window" role="img" aria-label="Detection window: last 8 frames">
+          <!-- 8 slots injected by JS -->
+        </div>
+        <dl class="metrics">
+          <div class="metric">
+            <dt>ema</dt>
+            <dd id="mEma">0.00</dd>
+          </div>
+          <div class="metric">
+            <dt>hits</dt>
+            <dd><span id="mHits">0</span>/8</dd>
+          </div>
+          <div class="metric">
+            <dt>soft</dt>
+            <dd class="dim">0.68</dd>
+          </div>
+        </dl>
+      </div>
+
+      <p class="rig-note">
+        Simulation of the real thresholds. <span class="dim">5 of 8 frames ≥ 0.68 · release at 0.40</span>
+      </p>
     </div>
-  </section>
 
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="section how-it-works" id="how-it-works">
-    <div class="container">
-      <span class="section-label reveal">Under the Hood</span>
-      <h2 class="section-title reveal">How Perde catches you</h2>
-      <p class="section-subtitle reveal">A multi-layered AI pipeline that runs entirely on your phone. No internet needed.</p>
+  </div>
 
-      <div class="architecture-flow">
-        <div class="flow-step reveal" style="--i:0">
-          <div class="flow-step-indicator">
-            <div class="flow-step-dot">👁️</div>
-          </div>
-          <div class="flow-step-content">
-            <h3>App Watcher</h3>
-            <p>Monitors which app is in the foreground. Only activates screen capture when a relevant app is open — not during banking, maps, or calls. Saves battery by sleeping when it's not needed.</p>
-          </div>
-        </div>
-
-        <div class="flow-step reveal" style="--i:1">
-          <div class="flow-step-indicator">
-            <div class="flow-step-dot">📸</div>
-          </div>
-          <div class="flow-step-content">
-            <h3>Screen Scanner</h3>
-            <p>Captures your screen at 1 frame per second at quarter resolution. Frame differencing detects when the screen hasn't changed and skips analysis — cutting AI work by ~90%.</p>
-          </div>
-        </div>
-
-        <div class="flow-step reveal" style="--i:2">
-          <div class="flow-step-indicator">
-            <div class="flow-step-dot">🧠</div>
-          </div>
-          <div class="flow-step-content">
-            <h3>AI Classifier</h3>
-            <p>A MobileNetV2 neural network classifies each frame into 5 categories: drawings, hentai, neutral, porn, sexy. Runs entirely on your phone — quantized to ~4 MB, GPU-accelerated when available.</p>
-          </div>
-        </div>
-
-        <div class="flow-step reveal" style="--i:3">
-          <div class="flow-step-indicator">
-            <div class="flow-step-dot">⚖️</div>
-          </div>
-          <div class="flow-step-content">
-            <h3>Sustained Viewing Detection</h3>
-            <p>This is the key. One NSFW frame doesn't trigger a block — you might just be scrolling. Perde waits for 5 out of 8 consecutive frames to show explicit content. That's 5+ seconds of deliberate viewing. That's when it knows.</p>
-          </div>
-        </div>
-
-        <div class="flow-step reveal" style="--i:4">
-          <div class="flow-step-indicator">
-            <div class="flow-step-dot">🛡️</div>
-          </div>
-          <div class="flow-step-content">
-            <h3>Intervention</h3>
-            <p>Full-screen overlay. Motivational message from your chosen faith or secular text. Home button pressed. The mindless spiral is interrupted. You're back to reality with a reminder of why you installed this.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- False positive layers -->
-      <div class="fp-layers reveal">
-        <h3>Smart enough to not ruin your day</h3>
-        <p>Perde doesn't panic at a bikini photo in your feed. Five layers make sure only sustained explicit viewing triggers a block:</p>
-
-        <div class="fp-layer-list">
-          <div class="fp-layer-item reveal" style="--i:0">
-            <div class="fp-layer-num">1</div>
-            <div class="fp-layer-text">
-              <strong>Class weighting —</strong>
-              <span>"sexy" (beach, sports, fashion) is weighted at 0.35×. Only explicitly pornographic content scores high.</span>
-            </div>
-          </div>
-          <div class="fp-layer-item reveal" style="--i:1">
-            <div class="fp-layer-num">2</div>
-            <div class="fp-layer-text">
-              <strong>Score smoothing —</strong>
-              <span>Exponential moving average prevents single-frame spikes from affecting the score.</span>
-            </div>
-          </div>
-          <div class="fp-layer-item reveal" style="--i:2">
-            <div class="fp-layer-num">3</div>
-            <div class="fp-layer-text">
-              <strong>Window voting (5 of 8) —</strong>
-              <span>5 out of 8 consecutive frames must score above threshold. Scrolling past a thumbnail won't trigger it.</span>
-            </div>
-          </div>
-          <div class="fp-layer-item reveal" style="--i:3">
-            <div class="fp-layer-num">4</div>
-            <div class="fp-layer-text">
-              <strong>Hysteresis —</strong>
-              <span>Block activates at 0.68, releases at 0.40. Prevents the block screen from flickering.</span>
-            </div>
-          </div>
-          <div class="fp-layer-item reveal" style="--i:4">
-            <div class="fp-layer-num">5</div>
-            <div class="fp-layer-text">
-              <strong>Cooldown —</strong>
-              <span>After a block clears, 4-second grace period before re-triggering. No annoying loops.</span>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>no domain list</span><span>·</span><span>no server</span><span>·</span><span>no account</span><span>·</span><span>no analytics</span><span>·</span><span>no subscription</span><span>·</span><span>no accountability partner</span><span>·</span><span>no telemetry</span><span>·</span>
+      <span>no domain list</span><span>·</span><span>no server</span><span>·</span><span>no account</span><span>·</span><span>no analytics</span><span>·</span><span>no subscription</span><span>·</span><span>no accountability partner</span><span>·</span><span>no telemetry</span><span>·</span>
     </div>
-  </section>
+  </div>
+</header>
 
-  <!-- ============ SENSITIVITY PROFILES ============ -->
-  <section class="section" id="profiles">
-    <div class="container">
-      <span class="section-label reveal">Sensitivity</span>
-      <h2 class="section-title reveal">How aggressive do you want it?</h2>
-      <p class="section-subtitle reveal">Three profiles. Measured trade-offs. The tighter you set it, the more normal content gets caught too. Pick what matches your stage of recovery.</p>
+<!-- ============ CHANNELS ============ -->
+<section class="band" id="channels">
+  <div class="shell">
+    <p class="tag">01 — Architecture</p>
+    <h2 class="head">Android will not let you<br>close both eyes at once.</h2>
+    <p class="sub">
+      So Perde uses two. When a page sets FLAG_SECURE the screenshot comes back black —
+      that is Android's design and no app can undo it without root. But FLAG_SECURE protects
+      the <em>rendered surface</em>. The accessibility tree is a separate structure, and it
+      keeps talking.
+    </p>
 
-      <div class="profiles-grid reveal-stagger">
-        <!-- Balanced -->
-        <div class="profile-card recommended reveal" style="--i:0">
-          <div class="profile-name">Balanced</div>
-          <div class="profile-desc">Start here. Catches porn, ignores everything else.</div>
-          <ul class="profile-list">
-            <li><span class="icon-block">✕</span> Porn — blocked</li>
-            <li><span class="icon-block">✕</span> Hentai / drawn — blocked</li>
-            <li><span class="icon-pass">✓</span> Suggestive but clothed — passes</li>
-            <li><span class="icon-pass">✓</span> Instagram provocative — passes</li>
-            <li><span class="icon-pass">✓</span> TikTok dance / body — passes</li>
-            <li><span class="icon-pass">✓</span> Beach / vacation photos — passes</li>
-            <li><span class="icon-pass">✓</span> Gym / fitness — passes</li>
-            <li><span class="icon-pass">✓</span> Fashion / underwear ads — passes</li>
+    <div class="channels">
+      <article class="channel" id="chPixel">
+        <header>
+          <span class="ch-num">Channel 1</span>
+          <h3>Pixels</h3>
+        </header>
+        <p class="ch-lead">A quantized MobileNetV2 classifies each captured frame into five classes.</p>
+        <ul class="spec">
+          <li><span>source</span><span>takeScreenshot()</span></li>
+          <li><span>model</span><span>TFLite · ~4 MB · int8</span></li>
+          <li><span>input</span><span>224 px · ¼ screen scale</span></li>
+          <li><span>verify</span><span>ImageEvidence — skin / chroma</span></li>
+        </ul>
+        <p class="ch-verdict bad" data-secure-label>Blind under FLAG_SECURE</p>
+      </article>
+
+      <div class="channel-join" aria-hidden="true">
+        <span class="join-line"></span>
+        <span class="join-op">max()</span>
+        <span class="join-line"></span>
+      </div>
+
+      <article class="channel" id="chText">
+        <header>
+          <span class="ch-num">Channel 2</span>
+          <h3>Text</h3>
+        </header>
+        <p class="ch-lead">The accessibility tree is read and scored on evidence, density and counter-evidence.</p>
+        <ul class="spec">
+          <li><span>source</span><span>accessibility tree</span></li>
+          <li><span>reads</span><span>url · title · headings · alt</span></li>
+          <li><span>budget</span><span>1400 nodes · 45 deep · 90 ms</span></li>
+          <li><span>dictionary</span><span>zero domains · zero brands</span></li>
+        </ul>
+        <p class="ch-verdict good">Unaffected by FLAG_SECURE</p>
+      </article>
+    </div>
+
+    <p class="channel-foot">
+      Both channels map to the same scale and enter the <strong>same</strong> decision engine.
+      There is no separate incognito rule and no second set of thresholds — the path that fires
+      in a private tab passes through every false-positive layer that normal browsing does.
+    </p>
+
+    <!-- Measurement table -->
+    <div class="measure">
+      <h3 class="measure-head">What the text channel actually scores</h3>
+      <p class="measure-sub">Run <code>python tools/metin_sim.py</code> — it loads the dictionary straight from <code>Lexicon.kt</code>, so the simulation cannot drift from the app. 28 realistic screen samples; the block threshold on Balanced is 0.78.</p>
+      <div class="measure-grid">
+        <div class="measure-col">
+          <p class="measure-label block">should block</p>
+          <ul>
+            <li><span>Tube site, English</span><b>1.000</b></li>
+            <li><span>Erotic fiction, text only</span><b>1.000</b></li>
+            <li><span>Obfuscated search: <code>p0rn</code>, <code>p o r n</code></span><b>1.000</b></li>
+            <li><span>Incognito — address + title only</span><b>0.965</b></li>
+            <li><span>Spanish page, not in dictionary</span><b>0.958</b></li>
           </ul>
-          <div class="profile-note">Best for daily use. Won't interrupt normal browsing.</div>
         </div>
-
-        <!-- Strict -->
-        <div class="profile-card reveal" style="--i:1">
-          <div class="profile-name">Strict</div>
-          <div class="profile-desc">Wider net. Catches more, occasional false alarms.</div>
-          <ul class="profile-list">
-            <li><span class="icon-block">✕</span> Porn — blocked</li>
-            <li><span class="icon-block">✕</span> Hentai / drawn — blocked</li>
-            <li><span class="icon-block">✕</span> Suggestive but clothed — blocked</li>
-            <li><span class="icon-pass">✓</span> Instagram provocative — passes</li>
-            <li><span class="icon-pass">✓</span> TikTok dance / body — passes</li>
-            <li><span class="icon-fp">⚠</span> Beach / vacation — <em>may trigger</em></li>
-            <li><span class="icon-pass">✓</span> Gym / fitness — passes</li>
-            <li><span class="icon-pass">✓</span> Fashion / underwear ads — passes</li>
+        <div class="measure-col">
+          <p class="measure-label pass">should pass</p>
+          <ul>
+            <li><span>Banking app</span><b>0.000</b></li>
+            <li><span>Obstetrics appointment app</span><b>0.000</b></li>
+            <li><span>YouTube / Netflix / Instagram</span><b>0.000</b></li>
+            <li><span>Sexual-health article</span><b>0.078</b></li>
+            <li><span>Underwear shopping</span><b>0.143</b></li>
+            <li><span>Biology lesson: reproduction</span><b>0.297</b></li>
+            <li><span>Wikipedia: human sexuality</span><b>0.318</b></li>
+            <li><span>Essay on porn addiction</span><b>0.453</b></li>
           </ul>
-          <div class="profile-note">Good if Balanced is too lenient. Beach photos may occasionally trigger.</div>
-        </div>
-
-        <!-- Rigid -->
-        <div class="profile-card reveal" style="--i:2">
-          <div class="profile-name">Rigid</div>
-          <div class="profile-desc">Nuclear option. Catches almost everything.</div>
-          <ul class="profile-list">
-            <li><span class="icon-block">✕</span> Porn — blocked</li>
-            <li><span class="icon-block">✕</span> Hentai / drawn — blocked</li>
-            <li><span class="icon-block">✕</span> Suggestive but clothed — blocked</li>
-            <li><span class="icon-block">✕</span> Instagram provocative — blocked</li>
-            <li><span class="icon-block">✕</span> TikTok dance / body — blocked</li>
-            <li><span class="icon-fp">⚠</span> Beach / vacation — <em>will trigger</em></li>
-            <li><span class="icon-fp">⚠</span> Gym / fitness — <em>will trigger</em></li>
-            <li><span class="icon-fp">⚠</span> Fashion / underwear ads — <em>will trigger</em></li>
-          </ul>
-          <div class="profile-note">For early recovery when you need maximum protection and can tolerate interruptions.</div>
         </div>
       </div>
+      <p class="measure-gap">
+        <span>lowest true positive <b>0.958</b></span>
+        <span>highest true negative <b>0.453</b></span>
+        <span class="hl">margin <b>0.506</b></span>
+      </p>
+      <p class="measure-note">
+        The single most discriminating signal is not vocabulary, it is density — matches per
+        100 words. A news article measures around 2. An encyclopedia entry around 9.
+        A pornographic page measures 23 to 79.
+      </p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ FAQ ============ -->
-  <section class="section how-it-works" id="faq">
-    <div class="container">
-      <span class="section-label reveal">FAQ</span>
-      <h2 class="section-title reveal">Honest answers</h2>
-      <p class="section-subtitle reveal">No marketing fluff. Here's exactly what Perde can and can't do.</p>
+<!-- ============ LAYERS ============ -->
+<section class="band alt" id="layers">
+  <div class="shell">
+    <p class="tag">02 — False positives</p>
+    <h2 class="head">One frame never blocks.<br>Not even a certain one.</h2>
+    <p class="sub">
+      The fast path exists for unambiguous content, and even that requires two consecutive
+      frames. Six layers sit in front of every block, in order.
+    </p>
 
-      <div class="faq-list">
-        <div class="faq-item reveal" style="--i:0">
-          <button class="faq-question" id="faq-q-1" aria-expanded="false" aria-controls="faq-a-1">
-            What exactly does Perde do?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-1" role="region" aria-labelledby="faq-q-1">
-            <div class="faq-answer-inner">
-              Perde is an anti-gooner app. It runs in the background on your Android phone and scans your screen using on-device AI. When it detects that you've been looking at explicit content for more than a few seconds — meaning you're not just scrolling past a thumbnail but actually watching porn — it throws a full-screen overlay with a motivational message, kills the app, and sends you to the home screen. It's built for people who genuinely want to break a compulsive porn habit.
-            </div>
-          </div>
+    <ol class="ledger">
+      <li class="row">
+        <span class="row-n">01</span>
+        <div class="row-body">
+          <h3>Class weighting</h3>
+          <p>The model returns five classes. <code>sexy</code> — where beach, sport, fashion and shirtless photos all land — is multiplied by 0.35. <code>drawings</code> is multiplied by zero.</p>
         </div>
-
-        <div class="faq-item reveal" style="--i:1">
-          <button class="faq-question" id="faq-q-2" aria-expanded="false" aria-controls="faq-a-2">
-            Does anyone see my screen data? Is it private?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-2" role="region" aria-labelledby="faq-q-2">
-            <div class="faq-answer-inner">
-              Completely private. All AI processing runs locally on your phone using TensorFlow Lite. There is no server, no cloud, no analytics, and no accountability partner dashboard. Nobody — including the developer — can see what you're looking at. Your screen data is analyzed and immediately discarded. The source code is open — you can verify this yourself.
-            </div>
-          </div>
+        <span class="row-stat">×0.35</span>
+      </li>
+      <li class="row">
+        <span class="row-n">02</span>
+        <div class="row-body">
+          <h3>Pixel evidence</h3>
+          <p>Nudity requires skin. The frame is split into a 4×6 grid and the densest tile is measured for skin ratio. If the pixels don't support the model's claim, the score is clipped. Line art — high achromatic ratio, low colourfulness, no skin — is zeroed outright.</p>
         </div>
-
-        <div class="faq-item reveal" style="--i:2">
-          <button class="faq-question" id="faq-q-3" aria-expanded="false" aria-controls="faq-a-3">
-            How is this better than a regular porn blocker?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-3" role="region" aria-labelledby="faq-q-3">
-            <div class="faq-answer-inner">
-              Regular porn blockers maintain lists of known domains. You find a new site, and it's not on the list. You use Reddit, Twitter, or Telegram — where explicit and normal content coexist. Blocklists can't handle that.<br><br>
-              Perde doesn't care about domains. It <em>sees</em> what's on your screen. It works on every app — browsers, social media, messaging apps, gallery, file managers. If explicit content is visible on your screen for several seconds, Perde detects it and intervenes.
-            </div>
-          </div>
+        <span class="row-stat">4×6</span>
+      </li>
+      <li class="row">
+        <span class="row-n">03</span>
+        <div class="row-body">
+          <h3>Exponential smoothing</h3>
+          <p>An EMA over the score stops one anomalous frame from moving the decision.</p>
         </div>
-
-        <div class="faq-item reveal" style="--i:3">
-          <button class="faq-question" id="faq-q-4" aria-expanded="false" aria-controls="faq-a-4">
-            Can I just turn it off when I get an urge?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-4" role="region" aria-labelledby="faq-q-4">
-            <div class="faq-answer-inner">
-              Not instantly. There's a built-in 15-minute disable delay. When you tap "stop," nothing happens for 15 minutes. That gap is the entire point — urges peak and fade within minutes. By the time it unlocks, you usually don't want to anymore.<br><br>
-              You <em>can</em> always use <code>adb uninstall</code> from a computer with a USB cable. But Perde isn't a cage — it's deliberate friction. The 15 minutes, the cable, the effort. Each step is a moment to reconsider. That's enough for most people.
-            </div>
-          </div>
+        <span class="row-stat">α 0.45</span>
+      </li>
+      <li class="row">
+        <span class="row-n">04</span>
+        <div class="row-body">
+          <h3>Window voting</h3>
+          <p>Five of the last eight frames must clear the threshold. Scrolling past a thumbnail cannot reach five.</p>
         </div>
-
-        <div class="faq-item reveal" style="--i:4">
-          <button class="faq-question" id="faq-q-5" aria-expanded="false" aria-controls="faq-a-5">
-            Does it work in incognito mode?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-5" role="region" aria-labelledby="faq-q-5">
-            <div class="faq-answer-inner">
-              Partially. Incognito mode uses FLAG_SECURE, which blocks screen capture — Perde sees only black frames. But it has three backup layers:<br><br>
-              <strong>Black frame detection:</strong> Treats consecutive black frames as suspicious. 4 black frames in a row = block.<br>
-              <strong>Accessibility URL monitoring:</strong> Reads the address bar text even in incognito — so it can catch known explicit domains.<br>
-              <strong>Private DNS:</strong> System-wide domain filtering that incognito can't bypass.<br><br>
-              These layers don't tell Perde <em>what</em> you're looking at, but they know <em>that</em> you're trying to hide it.
-            </div>
-          </div>
+        <span class="row-stat">5 / 8</span>
+      </li>
+      <li class="row">
+        <span class="row-n">05</span>
+        <div class="row-body">
+          <h3>Hysteresis</h3>
+          <p>The block engages at 0.68 and releases at 0.40, after five consecutive clean frames. Without the gap the overlay would flicker on and off at the boundary.</p>
         </div>
-
-        <div class="faq-item reveal" style="--i:5">
-          <button class="faq-question" id="faq-q-6" aria-expanded="false" aria-controls="faq-a-6">
-            Will it block normal content? Beach photos? Instagram?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-6" role="region" aria-labelledby="faq-q-6">
-            <div class="faq-answer-inner">
-              On the Balanced profile — almost never. Perde has five layers of false positive prevention specifically to avoid this. A single provocative photo while scrolling won't trigger it. It needs sustained explicit content across multiple seconds.<br><br>
-              On Strict, beach photos may occasionally trigger. On Rigid, expect interruptions with fitness and fashion content too. The trade-off is explicit: more coverage = more false alarms. Pick the profile that matches your tolerance.
-            </div>
-          </div>
+        <span class="row-stat">0.68 → 0.40</span>
+      </li>
+      <li class="row">
+        <span class="row-n">06</span>
+        <div class="row-body">
+          <h3>Cooldown</h3>
+          <p>After a block clears, nothing can re-trigger for four seconds. The overlay itself holds for at least three seconds and lifts unconditionally after eight — a safety valve, because while the curtain is down the screenshot captures the curtain, not the content, so the app can no longer answer whether the screen is clean. Nobody gets locked out of their own phone.</p>
         </div>
+        <span class="row-stat">4 s</span>
+      </li>
+    </ol>
 
-        <div class="faq-item reveal" style="--i:6">
-          <button class="faq-question" id="faq-q-7" aria-expanded="false" aria-controls="faq-a-7">
-            What can't it detect?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-7" role="region" aria-labelledby="faq-q-7">
-            <div class="faq-answer-inner">
-              Perde sees pixels. It can't read text (erotic stories, sexting, chat), hear audio (video sound), or see through FLAG_SECURE (incognito) without backup layers. It also can't tell the difference between a provocative Instagram post and a beach vacation photo — both look the same to the AI. If you need text detection, that's a different problem Perde doesn't solve.
-            </div>
-          </div>
-        </div>
+    <aside class="note">
+      <h3>Why a stick figure used to trigger it</h3>
+      <p>
+        The classifier cannot separate style from content: it splits line drawings between
+        <code>drawings</code> and <code>hentai</code>, and because <code>hentai</code> carries a
+        weight of 0.95, a crude sketch could clear 0.94 and fire the fast path on a single frame.
+        Two fixes went in — the pixel evidence layer above, and raising the fast path to two
+        consecutive frames. The cost was accepted deliberately and is listed under
+        <a href="#limits">limits</a>: black-and-white photography and line-art manga now pass.
+      </p>
+    </aside>
+  </div>
+</section>
 
-        <div class="faq-item reveal" style="--i:7">
-          <button class="faq-question" id="faq-q-8" aria-expanded="false" aria-controls="faq-a-8">
-            Why isn't this on the Play Store?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-8" role="region" aria-labelledby="faq-q-8">
-            <div class="faq-answer-inner">
-              Because the features that make Perde effective are exactly the ones Google bans. Screen overlay, accessibility services, disable delay — Play Store flags these as stalkerware behavior. The irony is that Perde is self-installed and sends data to nobody, but Google can't distinguish it policy-wise. So it's distributed as a sideloaded APK through GitHub.
-            </div>
-          </div>
-        </div>
+<!-- ============ TIMING ============ -->
+<section class="band" id="timing">
+  <div class="shell">
+    <p class="tag">03 — Timing</p>
+    <h2 class="head">Three to eight seconds.</h2>
+    <p class="sub">
+      Reaction time is a trade, stated openly: narrow the window to fire faster and the
+      false-positive rate climbs. These are simulated against the shipping logic.
+    </p>
 
-        <div class="faq-item reveal" style="--i:8">
-          <button class="faq-question" id="faq-q-9" aria-expanded="false" aria-controls="faq-a-9">
-            Is this a spy app or stalkerware?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-9" role="region" aria-labelledby="faq-q-9">
-            <div class="faq-answer-inner">
-              No. Perde is self-installed, self-configured, and sends data to absolutely nobody. There's no remote monitoring, no accountability partner, no reports. The permanent notification in the status bar and the absence of any stealth mode are <em>deliberate</em> design choices — they're what separate Perde from stalkerware. You install it on your own phone, for yourself.
-            </div>
-          </div>
-        </div>
-
-        <div class="faq-item reveal" style="--i:9">
-          <button class="faq-question" id="faq-q-10" aria-expanded="false" aria-controls="faq-a-10">
-            Does Perde support different religions?
-            <span class="faq-icon">+</span>
-          </button>
-          <div class="faq-answer" id="faq-a-10" role="region" aria-labelledby="faq-q-10">
-            <div class="faq-answer-inner">
-              Yes. When Perde blocks your screen, it shows a motivational message from your profile: <strong>Islam</strong> (Quran with Arabic original), <strong>Christianity</strong> (Scripture with Greek/Hebrew), <strong>Judaism</strong> (Tanakh with Hebrew), <strong>Secular</strong> (evidence-based motivational text), or <strong>Custom</strong> (your own messages). Messages are value reminders — not guilt trips. Research consistently shows that shame-based approaches fuel the cycle rather than breaking it.
-            </div>
-          </div>
-        </div>
+    <div class="timing">
+      <div class="timing-col">
+        <p class="timing-label pass">did not trigger</p>
+        <ul>
+          <li><span>Single-frame spike</span><b>—</b></li>
+          <li><span>Two-frame spike</span><b>—</b></li>
+          <li><span>Beach / sport, sustained 0.30</span><b>—</b></li>
+          <li><span>Fashion ad, sustained 0.58</span><b>—</b></li>
+          <li><span>Noisy, low average</span><b>—</b></li>
+        </ul>
+      </div>
+      <div class="timing-col">
+        <p class="timing-label block">blocked</p>
+        <ul>
+          <li><span>Unambiguous — fast path</span><b>0 s</b></li>
+          <li><span>Real content, steady high</span><b>3 s</b></li>
+          <li><span>Choppy but sustained</span><b>4 s</b></li>
+          <li><span>Real content, slow climb</span><b>8 s</b></li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- ============ SUPPORT / DONATE ============ -->
-  <section class="section donate-section" id="support">
-    <div class="container">
-      <span class="section-label reveal">Support</span>
-      <h2 class="section-title reveal">Keep Perde alive</h2>
-      <p class="section-subtitle reveal">Built by one person. No ads, no premium tier, no data monetization. If Perde helped you even once, consider throwing a few bucks.</p>
+    <div class="stats">
+      <div class="stat"><b>600 ms</b><span>sampling interval, active</span></div>
+      <div class="stat"><b>3 s</b><span>interval after 20 calm frames</span></div>
+      <div class="stat"><b>~90%</b><span>inference skipped on static screens</span></div>
+      <div class="stat"><b>15 min</b><span>delay before it can be switched off</span></div>
+    </div>
+    <p class="stats-foot">
+      Battery figures are reasoned from the architecture, not benchmarked. Measure your own
+      device with <code>adb shell dumpsys batterystats</code> — hardware, model size and GPU
+      support move the number a lot.
+    </p>
+  </div>
+</section>
 
-      <div class="donate-card reveal">
-        <span class="donate-emoji" aria-hidden="true">☕</span>
-        <h3>Buy me a coffee</h3>
-        <p>
-          Every donation — no matter how small — tells me someone found this useful enough to support. That keeps development going. No pressure, no guilt, no recurring charges.
-        </p>
-        <div class="donate-buttons">
-          <a href="https://github.com/sponsors/crucio4" class="btn-donate primary-donate" id="donate-github-btn" target="_blank" rel="noopener">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            Sponsor on GitHub
-          </a>
+<!-- ============ PROFILES ============ -->
+<section class="band alt" id="profiles">
+  <div class="shell">
+    <p class="tag">04 — Sensitivity</p>
+    <h2 class="head">The trade-off isn't tunable.<br>It was measured.</h2>
+    <p class="sub">
+      MobileNetV2 puts everything suggestive-but-clothed into one class. A holiday photo and
+      deliberately provocative content produce the same score inside it — the model sees pixels,
+      not intent. So <em>"catch Instagram but never my beach photos"</em> is not achievable with
+      this model. Pick which failure you prefer.
+    </p>
+
+    <div class="matrix-scroll">
+      <table class="matrix">
+        <caption class="sr-only">Content behaviour across the three sensitivity profiles</caption>
+        <thead>
+          <tr>
+            <th scope="col">Content</th>
+            <th scope="col">Balanced <span class="rec">recommended</span></th>
+            <th scope="col">Strict</th>
+            <th scope="col">Rigid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Explicit content</th><td class="b">block</td><td class="b">block</td><td class="b">block</td></tr>
+          <tr><th scope="row">Hentai / drawn</th><td class="b">block</td><td class="b">block</td><td class="b">block</td></tr>
+          <tr><th scope="row">Strongly suggestive, clothed</th><td class="p">passes</td><td class="b">block</td><td class="b">block</td></tr>
+          <tr><th scope="row">Instagram, provocative</th><td class="p">passes</td><td class="p">passes</td><td class="b">block</td></tr>
+          <tr><th scope="row">TikTok dance / body</th><td class="p">passes</td><td class="p">passes</td><td class="b">block</td></tr>
+          <tr class="split"><th scope="row">Beach / holiday photo</th><td class="p">passes</td><td class="f">triggers</td><td class="f">triggers</td></tr>
+          <tr><th scope="row">Gym / fitness</th><td class="p">passes</td><td class="p">passes</td><td class="f">triggers</td></tr>
+          <tr><th scope="row">Fashion / underwear ad</th><td class="p">passes</td><td class="p">passes</td><td class="f">triggers</td></tr>
+        </tbody>
+        <tfoot>
+          <tr><th scope="row">sexy weight</th><td>0.35</td><td>0.85</td><td>1.00</td></tr>
+          <tr><th scope="row">image threshold</th><td>0.68</td><td>0.55</td><td>0.50</td></tr>
+          <tr><th scope="row">text threshold</th><td>0.78</td><td>0.68</td><td>0.60</td></tr>
+        </tfoot>
+      </table>
+    </div>
+    <p class="matrix-key">
+      <span class="k f"></span> triggers = false positive. Listed, not hidden.
+    </p>
+  </div>
+</section>
+
+<!-- ============ LIMITS ============ -->
+<section class="band" id="limits">
+  <div class="shell">
+    <p class="tag">05 — Honest limits</p>
+    <h2 class="head">What it doesn't catch.</h2>
+    <p class="sub">
+      Measured, accepted, not hidden. If a filter's marketing has no failure list, nobody
+      looked for one.
+    </p>
+
+    <div class="limits">
+      <article class="limit">
+        <h3>A page with no text</h3>
+        <p>A single-video page with a euphemistic title and a wordless address, opened in incognito. No pixels, nothing readable.</p>
+        <p class="limit-soft">You normally arrive at such a page from a listing page — and the listing page is blocked. It escapes only if the address is typed directly.</p>
+      </article>
+      <article class="limit">
+        <h3>Non-Latin scripts</h3>
+        <p>The dictionary is Latin-script. Cyrillic, Arabic and CJK text is dropped during normalisation.</p>
+        <p class="limit-soft">Spanish, German and French pages are still caught, because the vocabulary overlaps.</p>
+      </article>
+      <article class="limit">
+        <h3>Accessibility switched off</h3>
+        <p>The text channel depends entirely on that service. Without it, private tabs return to being a blind spot.</p>
+        <p class="limit-soft">The in-app diagnostics screen says so explicitly rather than failing quietly.</p>
+      </article>
+      <article class="limit">
+        <h3>Audio</h3>
+        <p>Video sound is out of scope for both channels. Perde looks and reads; it does not listen.</p>
+        <p class="limit-soft">No plans here — an always-on microphone would contradict the privacy model.</p>
+      </article>
+      <article class="limit">
+        <h3>Monochrome imagery</h3>
+        <p>The pixel evidence layer needs skin chroma, so black-and-white photography and line-art manga pass the image channel.</p>
+        <p class="limit-soft">The deliberate price of never blocking a stick figure again.</p>
+      </article>
+      <article class="limit">
+        <h3>It is not a cage</h3>
+        <p>Sideloaded means <code>adb uninstall</code> always works from a computer with a cable.</p>
+        <p class="limit-soft">The friction is the 15 minutes, the cable and the effort — not a technical lock. Determination beats it. Autopilot doesn't.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BLOCK SCREEN ============ -->
+<section class="band alt" id="messages">
+  <div class="shell narrow">
+    <p class="tag">06 — The block screen</p>
+    <h2 class="head">Shame is the thing<br>that keeps the loop running.</h2>
+    <p class="sub">
+      The first draft of the block messages was designed to be humiliating. That was the wrong
+      instinct, and the literature is consistent about why: shame produces distress, and
+      distress is relieved by the same behaviour that caused it. The messages became value
+      reminders instead. It is a small difference in wording and a large difference in outcome.
+    </p>
+    <div class="chips">
+      <span class="chip">Islam</span>
+      <span class="chip">Christianity</span>
+      <span class="chip">Judaism</span>
+      <span class="chip">Secular</span>
+      <span class="chip">Your own words</span>
+    </div>
+    <p class="fineprint">
+      The scripture lists ship empty on purpose. Original texts are public domain but modern
+      translations are not, and shipping someone else's translation would be a licensing
+      problem. Bring a cleanly licensed source or write your own lines. The secular list is
+      original and complete.
+    </p>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="band" id="faq">
+  <div class="shell narrow">
+    <p class="tag">07 — Questions</p>
+    <h2 class="head">Straight answers.</h2>
+
+    <div class="faq">
+      <details class="q">
+        <summary><span>What exactly is Perde?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>A free, open-source Android app that filters explicit content on your own screen. It runs in the background, reads the screen through two independent channels, and when the evidence and the duration both indicate sustained viewing it covers the screen with a full-screen overlay, shows a message and sends you to the home screen.</p>
+          <p>The name is Turkish for <em>curtain</em>.</p>
         </div>
-      </div>
-    </div>
-  </section>
+      </details>
 
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer" id="footer">
-    <div class="container footer-inner">
-      <div class="footer-left">
-        <span class="footer-logo">
-          <img src="assets/perde_icon.png" alt="Perde Logo" class="footer-logo-img" width="24" height="24" style="width:24px; height:24px; max-width:24px; max-height:24px; flex-shrink:0; object-fit:contain;">
-          Perde
-        </span>
-        <span class="footer-copy">Open source · MIT License · Built for people who want to quit.</span>
-      </div>
-      <ul class="footer-links">
-        <li><a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener">GitHub</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#support">Donate</a></li>
-      </ul>
-    </div>
-  </footer>
+      <details class="q">
+        <summary><span>Does it work in incognito?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>Yes, through the text channel. Incognito sets FLAG_SECURE, so screen capture returns black frames and the pixels are genuinely gone — no app recovers them without root. But FLAG_SECURE protects the rendered surface, not the accessibility tree. The address bar, page title, headings, link text and image alt text keep arriving, and they go through the same decision engine.</p>
+          <p>In measurement, an incognito page exposing only its address and title scored <b>0.965</b> against a threshold of <b>0.78</b>. In incognito Perde can't see the pixels. It can still read the content.</p>
+        </div>
+      </details>
 
-  <!-- Scripts -->
-  <script src="script.js"></script>
+      <details class="q">
+        <summary><span>Isn't the text channel just a keyword blocklist?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>No, and the difference is structural. There is not a single domain name or brand name in the dictionary — domains are infinite and that war is lost on principle. What's in the dictionary is <em>language</em>.</p>
+          <p>Five things happen to that text. It's normalised, so <code>PORNO</code>, <code>pоrno</code> with a Cyrillic o, <code>p0rn0</code>, <code>p o r n o</code> and Turkish suffixed forms all collapse to one shape. Terms carry four weight classes including a <em>counter</em> class, combined with noisy-OR so no single term can reach 1.0 alone. A corroboration multiplier means one match scores 0.49 while five score 0.96 — one word in a chat cannot block. Density is measured per 100 words. And counter-evidence from banking, health, education and software vocabulary pulls the score down, disabled only once density passes 20 so a page can't immunise itself by printing "secure payment".</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>Does anything leave my phone?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>No. There is no server, no analytics and no network transmission of screen data. The model ships inside the APK. Text from the accessibility tree lives in memory, is overwritten on the next read, and is never written to disk or logged — the diagnostics screen shows counts like <code>s2 m1 d5 g0</code>, never the text itself. With protection off, no reading happens at all.</p>
+          <p>Worth saying plainly: an accessibility service can read everything on screen. That is a serious permission. You are granting it to a sideloaded app whose source you can read. Think twice before granting it to anything you can't.</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>Can I switch it off when I get an urge?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>Not immediately — turning it off starts a 15-minute delay. Urges peak and fade inside that window, which is the entire design.</p>
+          <p>And you can always run <code>adb uninstall</code> from a computer. That isn't an oversight. Perde is not a cage; it's friction. Fifteen minutes, a cable, and the effort of using both. Each step is a place to reconsider.</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>Will it interrupt me during normal use?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>On Balanced, effectively never — six layers stand in front of every block and no single frame can cause one. On Strict, beach and holiday photos will trigger. On Rigid, gym and fashion content will too. Those aren't warnings about edge cases, they're measured results, published in the <a href="#profiles">profile table</a>.</p>
+          <p>Settings, the dialer, contacts, camera, maps, the clock, keyboards and Google Wallet are excluded outright, so a false positive can't land somewhere it would actually hurt. Individual banking apps are not on that list and don't need to be — banking vocabulary is counter-evidence in the text channel, and those apps set FLAG_SECURE anyway.</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>Which apps does it cover?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>Everything except the exclusion list. The default is blacklist mode, not whitelist, because a whitelist is conceptually broken — however long you make it, it stays incomplete, and the app you forgot is exactly the one that gets used.</p>
+          <p>So a browser nobody has heard of is covered on install, with no list to maintain.</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>What does it cost me in battery?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>Nothing while the screen is off or an excluded app is in front. Frame differencing reduces each frame to a 16×16 fingerprint and skips inference when the screen hasn't changed — roughly 90% of the time in real use, because reading text, a paused video or an idle app all produce identical frames. After 20 calm frames sampling drops from 600 ms to 3 seconds. The model is quantized to about 4 MB and uses the GPU delegate when one is available.</p>
+          <p>These come from the architecture. They have not been benchmarked on a device, and saying otherwise would be inventing a number.</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>Why not on the Play Store?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>Accessibility service, screen overlay, delayed disabling — the three things that make Perde work are the three Play Store policy restricts to prevent stalkerware. The policy can't distinguish a self-installed filter from a covert monitor, so it treats them the same. Hence a sideloaded APK from GitHub.</p>
+        </div>
+      </details>
+
+      <details class="q">
+        <summary><span>Is this spyware?</span><i aria-hidden="true"></i></summary>
+        <div class="a">
+          <p>No. Self-installed, self-configured, reports to nobody. No remote monitoring, no partner dashboard, no logs leaving the device. The permanent status-bar notification is mandatory for a foreground service and there is deliberately no stealth mode — those two properties are what separate a personal filter from stalkerware, and both are visible at all times.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GET IT ============ -->
+<section class="band get" id="get">
+  <div class="shell narrow">
+    <p class="tag">08 — Install</p>
+    <h2 class="head">Five permissions,<br>granted by hand.</h2>
+    <p class="sub">
+      There is no runtime prompt for most of these. Android makes you go into Settings on
+      purpose — an app that could grant itself these would be dangerous.
+    </p>
+
+    <ol class="steps">
+      <li><b>Overlay</b><span>A button in the app opens the right Settings page.</span></li>
+      <li><b>Usage access</b><span>Settings › Special access › Usage access. Manual, no prompt exists.</span></li>
+      <li><b>Accessibility</b><span>Settings › Accessibility › Perde. <em>Not optional.</em> It takes screenshots without a prompt and it feeds the text channel. Off means private tabs are a blind spot and protection won't survive a process restart.</span></li>
+      <li><b>Screen capture</b><span>Only asked if the accessibility route is unavailable — below API 30. Re-asks on every restart.</span></li>
+      <li><b>Battery unrestricted</b><span>Settings › Battery › Unrestricted, or the system kills the service.</span></li>
+    </ol>
+
+    <div class="get-actions">
+      <a href="assets/perde.apk" download="perde.apk" class="btn btn-solid" id="download-btn-2">
+        <span>Download APK</span>
+        <span class="btn-meta" id="download-btn-meta-2">32 MB</span>
+      </a>
+      <a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener" class="btn btn-ghost">Source &amp; build instructions</a>
+      <a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener" class="btn btn-ghost">Sponsor</a>
+    </div>
+    <p class="fineprint">
+      Sideloading means your phone will warn you. That warning is correct and you should apply
+      it to every APK you're ever offered — including this one. Read the source, or build it
+      yourself and trust your own binary.
+    </p>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="foot">
+  <div class="shell foot-inner">
+    <div class="foot-brand">
+      <img src="assets/perde_icon.png" alt="" width="22" height="22">
+      <span>PERDE</span>
+    </div>
+    <p class="foot-line">On-device screen content filter for Android. Open source. Built by one person.</p>
+    <ul class="foot-links">
+      <li><a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#limits">Limits</a></li>
+      <li><a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener">Sponsor</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>
