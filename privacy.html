@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b0b0c">
+
+  <title>Privacy Policy — Perde</title>
+  <meta name="description" content="Perde collects nothing. It has no INTERNET permission, so it cannot send anything anywhere. All screen analysis happens on the device and is discarded immediately.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://crucio4.github.io/perde-web/privacy.html">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Privacy Policy — Perde">
+  <meta property="og:description" content="Perde collects nothing. No INTERNET permission, no analytics, no ads, no accounts. Verifiable in the source.">
+  <meta property="og:url" content="https://crucio4.github.io/perde-web/privacy.html">
+  <meta property="og:site_name" content="Perde">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://crucio4.github.io/perde-web/assets/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.png" type="image/png" sizes="48x48">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+  <style>
+    /* Sayfaya ozel: styles.css'e dokunmadan, ayni tokenlarla. */
+    .legal { padding: 132px 0 96px; }
+    .legal-head { border-bottom: 1px solid var(--line); padding-bottom: 28px; margin-bottom: 40px; }
+    .legal-head h1 { font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.08; letter-spacing: -0.02em; }
+    .legal-meta {
+      font-family: var(--mono); font-size: 0.78rem; color: var(--dim);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-top: 14px;
+    }
+    .legal-body { max-width: 74ch; }
+    .legal-body h2 {
+      font-family: var(--mono); font-size: 0.82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.16em; color: var(--dim);
+      margin: 52px 0 16px; padding-top: 20px; border-top: 1px solid var(--line-soft);
+    }
+    .legal-body p { margin-bottom: 16px; color: var(--bone); }
+    .legal-body ul { margin: 0 0 16px 0; list-style: none; }
+    .legal-body li { position: relative; padding-left: 22px; margin-bottom: 12px; }
+    .legal-body li::before {
+      content: ""; position: absolute; left: 0; top: 0.62em;
+      width: 10px; height: 1px; background: var(--dim);
+    }
+    .legal-body a { color: var(--bone); border-bottom: 1px solid var(--signal); }
+    .legal-body a:hover { color: var(--signal); }
+    .callout {
+      border: 1px solid var(--line); border-left: 2px solid var(--signal);
+      background: var(--ink-2); padding: 26px 28px; margin-bottom: 8px;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout strong { color: var(--bone); }
+    .keyline { font-family: var(--mono); font-size: 0.9em; color: var(--pass); }
+    .back { font-family: var(--mono); font-size: 0.8rem; color: var(--dim); }
+    .back:hover { color: var(--bone); }
+    @media (max-width: 720px) { .legal { padding: 108px 0 72px; } }
+  </style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="nav" id="navbar">
+  <div class="shell nav-inner">
+    <a href="./" class="brand">
+      <img src="assets/perde_mark.png" alt="" width="26" height="26" class="brand-mark">
+      <span class="brand-word">PERDE</span>
+      <span class="brand-gloss">/ curtain</span>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="./#channels">Channels</a></li>
+      <li><a href="./#limits">Limits</a></li>
+      <li><a href="./#faq">FAQ</a></li>
+      <li><a href="./#get" class="nav-cta">Download</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<main id="main" class="legal">
+  <div class="shell">
+
+    <div class="legal-head">
+      <a href="./" class="back">← Back to Perde</a>
+      <h1>Privacy Policy</h1>
+      <p class="legal-meta">Effective 31 July 2026 · Applies to the Perde Android app (<code>app.perde</code>) and this website</p>
+    </div>
+
+    <div class="legal-body">
+
+      <div class="callout">
+        <p><strong>Perde collects nothing.</strong> It does not gather, store, or transmit any personal data, and it has no user accounts.</p>
+        <p>This is not a promise resting on good intentions. The app does not request the Android
+        <code class="keyline">INTERNET</code> permission, so the operating system will not let it open a network
+        connection at all — not for analytics, not for crash reports, not for anything. You can confirm this
+        yourself in <a href="https://github.com/crucio4/perde-app/blob/main/app/src/main/AndroidManifest.xml" target="_blank" rel="noopener">the manifest</a>
+        or by inspecting the APK.</p>
+      </div>
+
+      <h2>What Perde reads while it runs</h2>
+      <p>To do its job, Perde has to look at your screen. Everything it looks at is processed in memory
+      and discarded; none of it is written to storage and none of it is sent anywhere.</p>
+      <ul>
+        <li><strong>Screen images.</strong> Captured through the accessibility service's screenshot API (or,
+        as a fallback on older devices, MediaProjection). Each frame is scaled down, classified by a neural
+        network that runs entirely on your phone, and then released from memory. Frames are never saved.</li>
+        <li><strong>On-screen text.</strong> Read from Android's accessibility tree. This is how Perde still
+        works in private/incognito tabs, where screenshots are blocked. The text is scored and discarded
+        within the same analysis pass. It is never saved, logged, or transmitted.</li>
+        <li><strong>The package name of the app in the foreground.</strong> Used to decide whether to run at
+        all, so Perde can stay idle — and save battery — while you are not in a monitored app.</li>
+      </ul>
+
+      <h2>What Perde stores on your device</h2>
+      <p>Only two things, both in Android's app-private preference storage
+      (<code>perde</code> and <code>perde_diag</code>), readable by no other app:</p>
+      <ul>
+        <li><strong>Your settings</strong> — language, message profile, sensitivity level, and whether
+        protection is meant to be on.</li>
+        <li><strong>Diagnostic counters</strong> — numbers shown in the app's own "Diagnostics" panel, such as
+        the last score, when the detection loop last ran, and how many frames were analysed.</li>
+      </ul>
+      <p>No screenshots, no screen text, no browsing history, and no record of what was blocked or when.
+      All of it is removed when you uninstall the app.</p>
+
+      <h2>What Perde sends</h2>
+      <p>Nothing. There is no analytics SDK, no crash reporter, no advertising, no third-party library that
+      phones home, and no server operated by this project. Perde is deliberately free of ads: an advertising
+      SDK inside an app that can read your screen would transmit device identifiers on every request, which
+      would contradict the only promise this app makes.</p>
+
+      <h2>The one link that leaves the app</h2>
+      <p>The <strong>Contribute</strong> button opens
+      <a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener">github.com/sponsors/crucio4</a>
+      in your browser, and only when you tap it. From that point you are on GitHub's website, under
+      <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">GitHub's privacy statement</a>,
+      not this one. Perde itself does not see or receive anything about that visit.</p>
+
+      <h2>Permissions, and why each one exists</h2>
+      <ul>
+        <li><strong>Accessibility service</strong> — reads on-screen text and captures the screen without a
+        recording indicator. This is the core of the app; without it there is no protection in private tabs.</li>
+        <li><strong>Display over other apps</strong> — draws the full-screen block overlay.</li>
+        <li><strong>Usage access</strong> — reports which app is in the foreground.</li>
+        <li><strong>Foreground service &amp; notifications</strong> — keeps detection alive and shows the
+        ongoing notification Android requires.</li>
+        <li><strong>Run at startup</strong> — restores protection after a reboot.</li>
+      </ul>
+      <p>Perde requests no access to contacts, location, microphone, camera, call logs, SMS, files, or
+      photos.</p>
+
+      <h2>Children</h2>
+      <p>Perde has no accounts and collects no data from anyone, of any age. Nothing is transmitted, so
+      nothing about a child — or an adult — can be collected, profiled, or shared.</p>
+
+      <h2>This website</h2>
+      <p>This site is static and hosted on GitHub Pages. It sets no cookies and runs no analytics. It loads
+      a web font from Google Fonts, which means your browser makes a request to Google's servers and Google
+      may log your IP address as part of serving that file. No other third party is contacted.</p>
+
+      <h2>Verify any of this</h2>
+      <p>Perde is open source under the GPL-3.0 licence. Every claim above can be checked against the code at
+      <a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener">github.com/crucio4/perde-app</a>.
+      Copyleft also means a modified version cannot be redistributed as closed source, so a fork that quietly
+      adds tracking cannot hide.</p>
+
+      <h2>Changes</h2>
+      <p>If this policy changes, the updated version will be posted on this page with a new effective date.</p>
+
+      <h2>Contact</h2>
+      <p>Questions or concerns:
+      <a href="https://github.com/crucio4/perde-app/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.</p>
+
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="shell foot-inner">
+    <div class="foot-brand">
+      <img src="assets/perde_mark.png" alt="" width="22" height="22">
+      <span>PERDE</span>
+    </div>
+    <p class="foot-line">On-device screen content filter for Android. Open source. Built by one person.</p>
+    <ul class="foot-links">
+      <li><a href="https://github.com/crucio4/perde-app" target="_blank" rel="noopener">Source</a></li>
+      <li><a href="./#faq">FAQ</a></li>
+      <li><a href="./#limits">Limits</a></li>
+      <li><a href="privacy.html">Privacy</a></li>
+      <li><a href="https://github.com/sponsors/crucio4" target="_blank" rel="noopener">Sponsor</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

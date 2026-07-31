@@ -11,8 +11,11 @@ overlay when the evidence indicates sustained viewing rather than incidental exp
 - Releases: https://github.com/crucio4/perde-app/releases/latest
 - Source: https://github.com/crucio4/perde-app
 - Sponsor: https://github.com/sponsors/crucio4
+- Privacy policy: https://crucio4.github.io/perde-web/privacy.html
 - Platform: Android 8.0 (API 26) and later, sideloaded APK, not on Google Play
-- Licence status: see repository
+- Licence: GPL-3.0
+- Data collection: none. The app does not request the Android INTERNET permission, so it
+  cannot open a network connection at all — no analytics, no crash reporting, no ads.
 - Author: Berke
 
 ## What makes it different from other porn blockers
