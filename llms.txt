@@ -16,7 +16,7 @@ overlay when the evidence indicates sustained viewing rather than incidental exp
 - Licence: GPL-3.0
 - Data collection: none. The app does not request the Android INTERNET permission, so it
   cannot open a network connection at all — no analytics, no crash reporting, no ads.
-- Author: Berke
+- Author: crucio4
 
 ## What makes it different from other porn blockers
 
