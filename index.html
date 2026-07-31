@@ -743,6 +743,38 @@
       purpose — an app that could grant itself these would be dangerous.
     </p>
 
+    <div class="walls">
+      <h3>Two things will stop you before the permissions</h3>
+      <p>Neither is a bug, and skipping either one leaves you with an app that looks installed and does nothing.</p>
+
+      <dl>
+        <dt>1 — Play Protect will refuse the install</dt>
+        <dd>
+          Perde takes screenshots, draws over other apps and reads the screen. That is the same
+          behavioural signature as monitoring software, so Google's scanner blocks it. The
+          difference is that monitoring software has to send what it sees somewhere — and Perde
+          has no <code>INTERNET</code> permission at all, so it cannot open a network connection.
+          Read the source if you'd rather not take that on trust.
+          <span class="path">Play Store › profile › Play Protect › ⚙ › turn scanning off → install → turn it back on</span>
+        </dd>
+
+        <dt>2 — Android 13+ blocks the accessibility switch</dt>
+        <dd>
+          Because Perde was installed from outside a store, Android greys the switch out as a
+          "restricted setting". Without this step the text channel never runs, private tabs stay
+          uncovered, and the app simply appears to detect nothing.
+          <span class="path">Settings › Apps › Perde › ⋮ › Allow restricted settings</span>
+        </dd>
+
+        <dt>3 — Cloned and dual-app profiles are out of reach</dt>
+        <dd>
+          A browser running inside a manufacturer's "dual app" or cloned profile (Xiaomi's Second
+          Space, for example) cannot be read or captured by Perde running in the main profile.
+          There is no workaround; it is a boundary Android enforces.
+        </dd>
+      </dl>
+    </div>
+
     <ol class="steps">
       <li><b>Overlay</b><span>A button in the app opens the right Settings page.</span></li>
       <li><b>Usage access</b><span>Settings › Special access › Usage access. Manual, no prompt exists.</span></li>

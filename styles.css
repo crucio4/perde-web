@@ -431,6 +431,26 @@ code {
 .note a { color: var(--bone); border-bottom: 1px solid var(--faint); }
 .note a:hover { color: var(--signal); border-color: var(--signal); }
 
+/* ---------- Kurulum duvarlari ----------
+   Izinlerden ONCE gelen engeller. Sayfada bilerek dikkat cekiyor:
+   bunlar anlatilmadigi icin kullanicilar uygulamayi calismaz halde
+   kurup "bozuk" sanip birakiyordu. */
+.walls {
+  border: 1px solid var(--line); border-left: 2px solid var(--signal);
+  background: var(--ink-2); padding: 26px 28px; margin-bottom: 44px;
+}
+.walls h3 { font-size: 1.08rem; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.015em; }
+.walls > p { color: var(--dim); font-size: 0.93rem; margin-bottom: 18px; }
+.walls dt { font-weight: 700; font-size: 0.97rem; margin-top: 20px; }
+.walls dt:first-of-type { margin-top: 0; }
+.walls dd { color: var(--dim); font-size: 0.93rem; line-height: 1.72; margin: 6px 0 0; max-width: 68ch; }
+.walls .path {
+  font-family: var(--mono); font-size: 0.85em; color: var(--bone);
+  background: rgba(242, 239, 233, 0.07); padding: 0.12em 0.4em;
+  display: inline-block; margin-top: 6px;
+}
+@media (max-width: 720px) { .walls { padding: 22px 20px; } }
+
 /* ---------- Timing ---------- */
 .timing { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; margin-bottom: 62px; }
 
